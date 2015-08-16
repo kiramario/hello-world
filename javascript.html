@@ -1,0 +1,185 @@
+<html>
+<head>
+</head>
+
+<style>
+	.left{float:left;}
+	.width_01{width:600px;}
+	.width_02{width:100px;}
+	.width_03{width:200px;}
+	.width_04{width:250px;}
+	.height_01{height:40px;}
+	.height_02{height:60px;}
+	.height_03{height:80px;}
+	.height_04{height:90px;}
+	div{border:1px solid black;}
+	
+	
+</style>
+<body>
+
+
+<script>
+	Function.prototype.method = function(name, func){
+		this.prototype[name] = func;
+		return this;
+	}
+	
+	Object.create = function(o) {
+		var F = function() {};
+		F.prototype = o;
+		return new F();
+	}
+	
+	var fibonacci = function(n) {
+		return (n - 1) < 2 ? (n- 1) : fibonacci(n - 1) + fibonacci (n - 2);
+	}
+	
+	var fibonacci_new = (function() {
+		var memo = [0, 1];
+		var fib = function(n) {
+			var result = memo[n - 1];
+			if(typeof memo[n - 1] === 'undefined') {
+				memo[n - 1] = fib(n - 1) +fib(n - 2);
+				result = memo[n -1];
+			}
+			return result;
+		}
+		return fib;
+	}())
+	
+	var factorial = function(n) {
+		return n < 2 ? 1 : n * factorial(n - 1)
+	}
+
+	var factorial_new = (function() {
+		var memo = [1];
+		var lab = function(n) {
+			var result = memo[n - 1];
+			if(typeof result !== "number"){
+				result = n * lab(n - 1);
+				memo[n - 1] = result;
+			};
+			return result;
+		};
+		return lab;
+	}());
+	
+	var memoizer = function(memo, formula) {
+		var recur = function(n) {
+			var result = memo[n - 1];
+			if(typeof result !== "number") {
+				result = formula(recur, n);
+				memo[n - 1] = result;
+			};
+			return result;
+		};
+		return recur;
+	}
+	var factorial_lab = memoizer([1], function(recur, n){
+		return n * recur(n - 1)
+	});
+
+	
+	
+	var mammal = function(spec) {
+		var that = {};
+		
+		that.name = spec.name;
+		that.age = spec.age;
+		that.color = spec.color;
+		that.gender = spec.gender;
+		that.species = spec.species;
+		
+		that.says = function() {
+			return spec.saying || " ";
+		};
+		that.eat = function() {
+			return spec.food || " ";
+		};
+		
+		return that;
+	}
+	
+	
+	var cat = function(spec, my) {
+		var that = {}, my = my || {};
+		spec.saying = my.saying;
+		spec.food = my.food;
+		
+		that = mammal(spec);
+		return that;
+	}
+	
+	var dog = function(spec, my) {
+		var that = {}, my = my || {};
+		spec.saying = my.saying;
+		spec.food = my.food;
+		
+		that = mammal(spec);
+		return that;
+	}
+	
+var isNumber = function isNumber(value) {
+	return typeof value === "number" && isFinite(value);
+}
+
+//*****************
+/*
+var values = [1, 2, 3];
+Array.method("recur", function(func){
+	var that = this;
+	var result = pre = cur = index = array = null;
+	(function(){
+		array = that;
+		for(var i = 1; i < array.length; i++) {
+			pre = result || array[0];
+			cur = array[i];
+			index = i;
+			result = func(pre, cur, index, array);
+		}
+	})();
+	return result;
+})
+console.log(values.recur(function(pre, cur, index, array){
+	return pre + cur;
+}));
+*/
+//*****************
+
+var global = function(){
+	return this;
+}()
+
+
+
+</script>
+	<!--
+	<div class="width_01" style="height:600px;">
+		<div class="width_02 height_04 left"></div>
+		<div class="width_04 height_01 left"></div>
+		<div class="width_02 height_04 left"></div>
+		<div class="width_02 height_03 left"></div>
+		<div class="width_02 height_03 left"></div>
+		<div class="width_02 height_03 left"></div>
+	</div>
+	
+	<div class="width_01" style="height:600px;">
+		<div class="width_02 height_04 left"></div>
+		<p id="ido">SSSSSSSSSSSSSSS SSSSSSSSSSSSSSS SSSSSSSSSSSSSSS SSSSSSSSSSS 
+		SSSSSSSSSSSSSSSSSSS SSSSSSSSSSSSSSS SSSSSSSSSSSSSSSSSSS SSSSSSSSSSSSSSS 
+		SSSSSSSSSSSSSSSSSSS SSSSSSSSSSSSSSS SSSSSSSSSSSSSSSSSSS SSSSSSSSSSSSSSS 
+		SSSSSSSSSSSSSSSSSSS SSSSSSSSSSSSSSS SSSSSSSSSSSSSSSSSSS SSSSSSSSSSSSSSS 
+		SSSSSSSSSSSSSSSSSSS SSSSSSSSSSSSSSS SSSSSSSSSSSSSSSSSSS SSSSSSSSSSSSSSS 
+		SSSSSSSSSSSSSSSSSSS SSSSSSSSSSSSSSS SSSSSSSSSSSSSSSSSSS SSSSSSSSSSSSSSS 
+		SSSSSSSSSSSSSSSSSSS SSSSSSSSSSSSSSS SSSSSSSSSSSSSSSSSSS SSSSSSSSSSSSSSS 
+		SSSSSSSSSSSSSSSSSSS SSSSSSSSSSSSSSS SSSSSSSSSSSSSSSSSSS SSSSSSSSSSSSSSS 
+		</p>
+	</div>
+	-->
+	
+	
+	
+	
+</body>
+</html>
