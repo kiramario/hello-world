@@ -1,15 +1,17 @@
-var webpack = require('webpack');
+var webpack = require("webpack");
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-    entry: {
-        bundle: './index.js'
-    },
-    output: {
-        path: __dirname + '/build/',
-        filename: '[name].js',
+	entry: {
+		bundle: ['babel-polyfill','./index.js'],
+		"commonFile/common": ['react','react-dom'],
+		"./component/component": ['./component']
+	},
+	output: {
+		path: __dirname + '/build/', 
+		filename: '[name].js',
 		publicPath: "./"
-    },
+	},
 	module: {
 		loaders: [
 			{
@@ -29,8 +31,11 @@ module.exports = {
 	},
 	plugins:[
 		new ExtractTextPlugin('prefixer_main.css', {
-		   disable: false,
-		   allowChunks: true
+			disable: false,
+			allowChunks: true
+		}),
+		new webpack.optimize.CommonsChunkPlugin({
+			names: ["./component/component","commonFile/common"]
 		})
 	]
 }

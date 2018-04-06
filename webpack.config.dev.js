@@ -1,12 +1,12 @@
 var webpack = require('webpack')
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+// var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 module.exports = {
 	entry: {
-		bundle:['webpack-dev-server/client?http://127.0.0.1:9090','webpack/hot/dev-server','./index.js']
+		bundle:['webpack-dev-server/client?http://127.0.0.1:9090','webpack/hot/dev-server','babel-polyfill','./index.js']
 	},
 
 	output: {
@@ -32,9 +32,9 @@ module.exports = {
 		]
 	},
 	plugins:[
-		new HtmlWebpackPlugin({
-            template: './main.html'
-        }),
+		// new HtmlWebpackPlugin({
+            // template: './main.html'
+        // }),
 		new webpack.HotModuleReplacementPlugin(),
 		new ExtractTextPlugin('prefixer_main.css', {
 			disable: false,
